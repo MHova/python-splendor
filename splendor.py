@@ -25,6 +25,11 @@ def determine_starting_gems(num_players):
 def reduce_gems(reduction, gems):
   return {k : v - reduction for k, v in gems.items()}
 
+def dict_to_pretty_str(d):
+  separator = ', '
+  format_string = '{}:{}' + separator
+  return ''.join(format_string.format(k, v) for k, v in d.items()).rstrip(separator)
+
 num_players = input("Enter the number of players: ")
 starting_gems = determine_starting_gems(int(num_players))
-print("The starting gems will be: " + str(starting_gems))
+print("The starting gems will be " + dict_to_pretty_str(starting_gems))
