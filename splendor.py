@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 def determine_starting_gems(num_players):
   if num_players < 2 or num_players > 4:
     raise ValueError('There must be 2-4 players')
@@ -18,10 +20,11 @@ def determine_starting_gems(num_players):
 
   # yellow/wild gems are never reduced
   result['yellow'] = 5
-  return result
+  return OrderedDict(sorted(result.items()))
 
 def reduce_gems(reduction, gems):
   return {k : v - reduction for k, v in gems.items()}
 
 num_players = input("Enter the number of players: ")
-print("The starting gems will be: " + str(determine_starting_gems(int(num_players))))
+starting_gems = determine_starting_gems(int(num_players))
+print("The starting gems will be: " + str(starting_gems))
