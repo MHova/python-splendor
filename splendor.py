@@ -30,6 +30,15 @@ def dict_to_pretty_str(d):
   format_string = '{}:{}' + separator
   return ''.join(format_string.format(k, v) for k, v in d.items()).rstrip(separator)
 
+def help_string():
+  return '''Possible Actions:
+    1) Take gems. Syntax: take <num gems> <color>. ex: take 3 black'''
+
+# main
 num_players = input("Enter the number of players: ")
 starting_gems = determine_starting_gems(int(num_players))
 print("The starting gems will be " + dict_to_pretty_str(starting_gems))
+
+while True:
+  print(help_string())
+  action = input('Enter an action\n')
