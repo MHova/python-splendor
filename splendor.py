@@ -27,8 +27,8 @@ def reduce_gems(reduction, gems):
 
 def dict_to_pretty_str(d):
   separator = ', '
-  format_string = '{}:{}' + separator
-  return ''.join(format_string.format(k, v) for k, v in d.items()).rstrip(separator)
+  format_string = '{}:{}'
+  return separator.join(format_string.format(k, v) for k, v in d.items())
 
 def help_string():
   return '''Possible Actions:
