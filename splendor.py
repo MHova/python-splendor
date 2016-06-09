@@ -1,5 +1,6 @@
 from collections import OrderedDict
 import sys
+import re
 
 def determine_starting_gems(num_players):
   if num_players < 2 or num_players > 4:
@@ -36,6 +37,18 @@ def help_string():
     1) take <num gems> <color> - Take gems from the specified color. ex: take 3 black
     2) quit - Quit the program'''
 
+def take_gems(num_gems, color):
+  string_format = 'You took {} {} gem'
+
+  if num_gems <= 0:
+    print('{} is not a valid number'.format(num_gems))
+    return
+  elif num_gems > 1:
+    # pluralize the word 'gem'
+    string_format += 's'
+
+  print(string_format.format(num_gems, color))
+
 # main
 num_players = input("Enter the number of players: ")
 starting_gems = determine_starting_gems(int(num_players))
@@ -43,8 +56,15 @@ print("The starting gems will be " + dict_to_pretty_str(starting_gems))
 
 while True:
   print(help_string())
-  action = input('Enter an action\n')
+  action = input('Enter an action\n').strip()
 
   if action.lower() == 'quit':
-    print("Thanks for playing!")
+    print('Thanks for playing!')
     sys.exit()
+
+  take_gems_pattern = '^take (\d+) (\w+)'
+  match = re.search(take_gems_pattern, action)
+
+  if match:
+    take_gems(int(match.group(1)), match.group(2))
+
