@@ -32,7 +32,7 @@ def dict_to_pretty_str(d):
 
 def help_string():
   return '''Possible Actions:
-    1) Take gems. Syntax: take <num gems> <color>. ex: take 3 black'''
+    1) take <num gems> <color> - Take gems from the specified color. ex: take 3 black'''
 
 # main
 num_players = input("Enter the number of players: ")
