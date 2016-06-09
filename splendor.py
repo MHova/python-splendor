@@ -32,10 +32,14 @@ def dict_to_pretty_str(d):
   format_string = '{}:{}'
   return separator.join(format_string.format(k, v) for k, v in d.items())
 
-def help_string():
-  return '''Possible Actions:
-    1) take <num gems> <color> - Take gems from the specified color. ex: take 3 black
+def help_string(gems):
+  current_state_string = 'Available gems - ' + dict_to_pretty_str(gems)
+
+  help_string = '''Possible Actions:
+    1) take <num gems> <color> - Take gems of the specified color. ex: take 3 black
     2) quit - Quit the program'''
+
+  return current_state_string + '\n\n' + help_string + '\n'
 
 def take_gems(num_gems, color):
   string_format = 'You took {} {} gem'
@@ -51,11 +55,11 @@ def take_gems(num_gems, color):
 
 # main
 num_players = input("Enter the number of players: ")
-starting_gems = determine_starting_gems(int(num_players))
-print("The starting gems will be " + dict_to_pretty_str(starting_gems))
+gems = determine_starting_gems(int(num_players))
+print("The starting gems will be " + dict_to_pretty_str(gems) + '\n')
 
 while True:
-  print(help_string())
+  print(help_string(gems))
   action = input('Enter an action\n').strip()
 
   if action.lower() == 'quit':
