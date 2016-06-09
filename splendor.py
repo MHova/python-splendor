@@ -41,34 +41,37 @@ def help_string(gems):
 
   return current_state_string + '\n\n' + help_string + '\n'
 
-def take_gems(num_gems, color):
-  string_format = 'You took {} {} gem'
+def take_different_gems(colors_list, gems_state):
+  for color in colors_list:
+    if color not in gems_state:
+      print('{} is not a valid color'.format(color))
+      return
 
-  if num_gems <= 0:
-    print('{} is not a valid number'.format(num_gems))
+  colors_set = set(colors_list)
+
+  if len(colors_set) != len(colors_list):
+    print('Cannot take more than one from a color')
     return
-  elif num_gems > 1:
-    # pluralize the word 'gem'
-    string_format += 's'
 
-  print(string_format.format(num_gems, color))
+  taken_gems_str = ', '.join(c for c in colors_list)
+  print('You took {} gems'.format(taken_gems_str))
 
 # main
 num_players = input("Enter the number of players: ")
-gems = determine_starting_gems(int(num_players))
-print("The starting gems will be " + dict_to_pretty_str(gems) + '\n')
+gems_state = determine_starting_gems(int(num_players))
+print("The starting gems will be " + dict_to_pretty_str(gems_state) + '\n')
 
 while True:
-  print(help_string(gems))
+  print(help_string(gems_state))
   action = input('Enter an action\n').strip()
 
   if action.lower() == 'quit':
     print('Thanks for playing!')
     sys.exit()
 
-  take_gems_pattern = '^take (\d+) (\w+)'
-  match = re.search(take_gems_pattern, action)
+  take_different_gems_pattern = '^take (\w+) (\w+) (\w+)$'
+  match = re.search(take_different_gems_pattern, action)
 
   if match:
-    take_gems(int(match.group(1)), match.group(2))
+    take_different_gems([match.group(1), match.group(2), match.group(3)], gems_state)
 
