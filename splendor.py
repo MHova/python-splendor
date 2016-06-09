@@ -1,6 +1,7 @@
 from collections import OrderedDict
 import sys
 import re
+import copy
 
 def determine_starting_gems(num_players):
   if num_players < 2 or num_players > 4:
@@ -45,16 +46,26 @@ def take_different_gems(colors_list, gems_state):
   for color in colors_list:
     if color not in gems_state:
       print('{} is not a valid color'.format(color))
-      return
+      return gems_state
+
+  for color in colors_list:
+    if gems_state[color] == 0:
+      print('There are no more {} gems'.format(color))
+      return gems_state
 
   colors_set = set(colors_list)
 
   if len(colors_set) != len(colors_list):
     print('Cannot take more than one from a color')
-    return
+    return gems_state
 
   taken_gems_str = ', '.join(c for c in colors_list)
   print('You took {} gems'.format(taken_gems_str))
+
+  new_state = copy.deepcopy(gems_state)
+  for color in colors_list:
+    new_state[color] = new_state[color] - 1
+  return new_state
 
 # main
 num_players = input("Enter the number of players: ")
@@ -73,5 +84,6 @@ while True:
   match = re.search(take_different_gems_pattern, action)
 
   if match:
-    take_different_gems([match.group(1), match.group(2), match.group(3)], gems_state)
+    gems_state = take_different_gems(
+                  [match.group(1), match.group(2), match.group(3)], gems_state)
 
