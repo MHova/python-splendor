@@ -1,4 +1,5 @@
 from collections import OrderedDict
+import sys
 
 def determine_starting_gems(num_players):
   if num_players < 2 or num_players > 4:
@@ -32,7 +33,8 @@ def dict_to_pretty_str(d):
 
 def help_string():
   return '''Possible Actions:
-    1) take <num gems> <color> - Take gems from the specified color. ex: take 3 black'''
+    1) take <num gems> <color> - Take gems from the specified color. ex: take 3 black
+    2) quit - Quit the program'''
 
 # main
 num_players = input("Enter the number of players: ")
@@ -42,3 +44,7 @@ print("The starting gems will be " + dict_to_pretty_str(starting_gems))
 while True:
   print(help_string())
   action = input('Enter an action\n')
+
+  if action.lower() == 'quit':
+    print("Thanks for playing!")
+    sys.exit()
