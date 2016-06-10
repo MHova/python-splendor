@@ -72,8 +72,8 @@ def take_different_gems(colors_list, gems_state, player):
   new_gems_state = copy.deepcopy(gems_state)
   new_player = copy.deepcopy(player)
   for color in colors_list:
-    new_gems_state[color] = new_gems_state[color] - 1
-    new_player.gems[color] = new_player.gems[color] + 1
+    new_gems_state[color] -= 1
+    new_player.gems[color] += 1
   return (new_gems_state, new_player)
 
 # main
