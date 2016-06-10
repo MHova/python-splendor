@@ -77,7 +77,14 @@ def take_different_gems(colors_list, gems_state, player):
   return (new_gems_state, new_player)
 
 # main
-num_players = input("Enter the number of players> ")
+num_players = None
+while True:
+  try:
+    num_players = int(input('Enter the number of players> '))
+    break
+  except ValueError:
+    continue
+
 gems_state = determine_starting_gems(int(num_players))
 # TODO: implement multiple players
 player = Player()
