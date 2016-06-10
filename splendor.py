@@ -3,15 +3,13 @@ import sys
 import re
 import copy
 
+GEM_COLORS = {'black', 'blue', 'green', 'red', 'white', 'yellow'}
+
 def determine_starting_gems(num_players):
   if num_players < 2 or num_players > 4:
     raise ValueError('There must be 2-4 players')
 
-  four_player_gems = {'black' : 7,
-                      'blue'  : 7,
-                      'green' : 7,
-                      'red'   : 7,
-                      'white' : 7}
+  four_player_gems = {c : 7 for c in GEM_COLORS}
 
   # reduce starting gems appropriate to the player count
   if num_players == 2:
@@ -44,7 +42,7 @@ def help_string(gems):
 
 def take_different_gems(colors_list, gems_state):
   for color in colors_list:
-    if color not in gems_state:
+    if color not in GEM_COLORS:
       print('{} is not a valid color'.format(color))
       return gems_state
 
