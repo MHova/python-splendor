@@ -55,6 +55,10 @@ def take_different_gems(colors_list, gems_state):
 
   colors_set = set(colors_list)
 
+  if 'yellow' in colors_set:
+    print('Yellow gems cannot be taken directly')
+    return gems_state
+
   if len(colors_set) != len(colors_list):
     print('Cannot take more than one from a color')
     return gems_state
