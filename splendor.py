@@ -85,7 +85,11 @@ print("The starting gems will be " + dict_to_pretty_str(gems_state) + '\n')
 
 while True:
   print(help_string(gems_state, player))
-  action = input('Enter an action> ').strip()
+
+  try:
+    action = input('Enter an action> ').strip()
+  except EOFError:
+    continue
 
   if action.lower() == 'quit':
     print('Thanks for playing!')
