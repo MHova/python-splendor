@@ -77,7 +77,7 @@ def take_different_gems(colors_list, gems_state, player):
   return (new_gems_state, new_player)
 
 # main
-num_players = input("Enter the number of players: ")
+num_players = input("Enter the number of players> ")
 gems_state = determine_starting_gems(int(num_players))
 # TODO: implement multiple players
 player = Player()
@@ -85,7 +85,7 @@ print("The starting gems will be " + dict_to_pretty_str(gems_state) + '\n')
 
 while True:
   print(help_string(gems_state, player))
-  action = input('Enter an action\n').strip()
+  action = input('Enter an action> ').strip()
 
   if action.lower() == 'quit':
     print('Thanks for playing!')
