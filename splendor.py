@@ -37,7 +37,7 @@ def help_string(gems):
   current_state_string = 'Available gems - ' + dict_to_pretty_str(gems)
 
   help_string = '''Possible Actions:
-    1) take <num gems> <color> - Take gems of the specified color. ex: take 3 black
+    1) take <color1> <color2> <color3> - Take 3 gems, each of different colors. ex: take black blue red
     2) quit - Quit the program'''
 
   return current_state_string + '\n\n' + help_string + '\n'
